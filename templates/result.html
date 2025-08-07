@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>轉錄結果 #{{ audio_id }}</title>
+
+  <!-- Google Font（可視需求移除）-->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- 外部樣式表 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+</head>
+<body>
+  {% include '_navbar.html' %}
+<main class="card">
+  <h1 class="title">🎧 轉錄結果（Audio&nbsp;ID&nbsp;={{ audio_id }}）</h1>
+
+  <audio id="player" controls src="{{ url_for('download_file', fname=audio_file) }}"></audio>
+
+  <ul id="caption-list" class="captions">
+  {% for s in segments %}
+    <li class="row" data-id="{{ s.SegID }}">
+      <span class="time">[{{ '%.2f'|format(s.StartSec) }}–{{ '%.2f'|format(s.EndSec) }}]</span>
+      <span class="text">{{ s.Text }}</span>
+      {% if current_user.is_authenticated %}
+        <button class="edit-btn" title="編輯">✏️</button>
+        <button class="save-btn" title="儲存">💾</button>
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+
+  <p class="back"><a href="{{ url_for('home') }}">← 回前台</a></p>
+</main>
+
+<!-- 外部腳本：負責行內編輯 + Ajax 儲存 -->
+<script src="{{ url_for('static', filename='js/result.js') }}"></script>
+</body>
+</html>

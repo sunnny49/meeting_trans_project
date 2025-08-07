@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="zh-Hant"><head>
+<meta charset="utf-8">
+<title>管理者登入</title>
+<!-- Google Font，可依需求移除 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<!-- 外部樣式表 -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/decorations.css') }}">
+</head>
+<body>
+
+<div class="login-card">
+
+  {# ------------------ 表單 ------------------ #}
+  <form id="login-form" method="POST" action="{{ url_for('login') }}">
+    <h2 class="login-title">Login</h2>
+    <input name="username" placeholder="帳號" required>
+    <input type="password" name="password" placeholder="密碼" required>
+    <button type="submit" class="btn-primary">登入</button>
+  </form>
+
+  {# ------- 把回首頁按鈕放到卡片內 ------- #}
+  <a href="{{ url_for('home') }}" class="btn-secondary back-btn">回首頁</a>
+
+</div>
+
+</body>
+</html>

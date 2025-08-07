@@ -1,0 +1,22 @@
+/* ---------------- decorations.css ---------------- */
+
+/* 整頁背景：柔和點陣 */
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:
+    radial-gradient(circle 1.5px at 1.5px 1.5px, #d7dee7 99%, transparent 0) repeat;
+  background-size:28px 28px;
+  z-index:-2;
+}
+
+/* 右上 & 左下角斜線裝飾 */
+body::after{
+  content:"";
+  position:fixed;inset:0;
+  background:
+    linear-gradient(135deg, rgba(52,152,219,.08) 25%, transparent 25%)repeat;
+  background-size: 22px 22px;
+  opacity:.4;
+  z-index:-3;
+}

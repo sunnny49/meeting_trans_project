@@ -1,0 +1,9 @@
+{# 只含導覽列，可被各頁用 include #}
+<div class="navbar">
+  {% if current_user.is_authenticated %}
+    <span class="welcome">管理者你好！</span>
+    <a href="{{ url_for('logout') }}" class="btn-logout">登出</a>
+  {% else %}
+    <a href="{{ url_for('login') }}" class="btn-login">登入</a>
+  {% endif %}
+</div>

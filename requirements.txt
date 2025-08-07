@@ -1,0 +1,8 @@
+Flask>=2.3
+Werkzeug>=2.3
+python-dotenv
+sqlalchemy
+pyodbc
+openai-whisper==20230314           # 或改 faster-whisper
+soundfile
+tqdm

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>音檔轉文字用介面</title>
+
+  <!-- Google Font，可視需求移除 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- 外部 CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+
+{% include '_navbar.html' %}
+
+<div class="container">
+  <h1>已上傳檔案</h1>
+
+  <!-- ===== 檔案清單（加入改名／刪除功能） ===== -->
+  <ul class="file-list">
+  {% for f in files %}
+    <li>
+      <!-- 檔名：任何人都可點 -->
+      <a class="file-link"
+         href="{{ url_for('result', audio_id=f.AudioID) }}">
+         {{ f.OriginalName or '無檔名' }}
+      </a>
+
+      <small class="meta">
+        (ID={{ f.AudioID }}, {{ f.CreatedAt.strftime('%Y-%m-%d %H:%M') }})
+      </small>
+
+      {% if current_user.is_authenticated %}
+        <!-- 只有登入者才顯示改名表單 -->
+        <form class="inline"
+              action="{{ url_for('rename_audio', audio_id=f.AudioID) }}"
+              method="POST">
+          <input name="new_name" placeholder="新檔名" required>
+          <button class="btn blue">改名</button>
+        </form>
+
+        <!-- 刪除按鈕 -->
+        <form class="inline"
+              action="{{ url_for('delete_audio', audio_id=f.AudioID) }}"
+              method="POST"
+              onsubmit="return confirm('確定刪除？');">
+          <button class="btn red">刪除</button>
+        </form>
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+
+  <!-- Flash 訊息（改名 / 刪除結果） -->
+  {% with msgs = get_flashed_messages() %}
+    {% if msgs %}
+      <p class="flash">{{ msgs[0] }}</p>
+    {% endif %}
+  {% endwith %}
+
+  <!-- ===== 上傳表單 ===== -->
+  <h2 style="margin-top:0">➕ 新增上傳</h2>
+  <form class="upload-box"
+        action="{{ url_for('upload') }}"
+        method="POST"
+        enctype="multipart/form-data">
+    <input type="file" name="audio" accept="audio/*">
+    <br>
+    <button type="submit">開始轉錄</button>
+  </form>
+</div>
+
+</body>
+</html>

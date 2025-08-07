@@ -1,0 +1,94 @@
+/* 全局排版 --------------------------------------------------*/
+html{box-sizing:border-box;font-size:16px;}
+*,*::before,*::after{box-sizing:inherit;}
+body{
+  font-family:"Noto Sans TC",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  background:#f5f7fa;
+  color:#2c3e50;
+  margin:0;
+  padding:2.5rem 1rem;
+  line-height:1.6;
+}
+
+/* 容器卡片 --------------------------------------------------*/
+.container{
+  max-width:720px;
+  margin:auto;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 6px 12px rgba(0,0,0,.08);
+  padding:2rem 2.5rem;
+}
+
+/* 標題 --------------------------------------------------*/
+h1{
+  margin:0 0 1.5rem;
+  font-size:1.5rem;
+  font-weight:700;
+  border-left:4px solid #3498db;
+  padding-left:.6rem;
+}
+
+/* 檔案清單 --------------------------------------------------*/
+ul.file-list{
+  list-style:none;
+  margin:0 0 2rem;
+  padding:0;
+}
+ul.file-list li{
+  margin:.3rem 0;
+  padding:.3rem 0;
+  border-bottom:1px solid #eceff4;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+ul.file-list li:last-child{border-bottom:none;}
+ul.file-list a{
+  color:#0069d9;
+  text-decoration:none;
+}
+ul.file-list a:hover{color:#0052a5;text-decoration:underline;}
+small.meta{color:#6c757d;font-size:.85rem;}
+
+/* 上傳區 --------------------------------------------------*/
+.upload-box{
+  border:2px dashed #bfc8d2;
+  border-radius:8px;
+  padding:1.5rem;
+  text-align:center;
+  background:#fafbfc;
+}
+.upload-box:hover{border-color:#3498db;}
+input[type="file"]{margin-bottom:1rem;}
+button{
+  background:#3498db;
+  border:none;
+  color:#fff;
+  padding:.5rem 1.4rem;
+  font-size:1rem;
+  border-radius:6px;
+  cursor:pointer;
+  transition:background .2s;
+}
+button:hover{background:#2174b7;}
+
+/* ===== 導覽列 ===== */
+.navbar{
+  display:flex; justify-content:flex-end; align-items:center;
+  gap:1rem; margin-bottom:1.2rem;
+}
+.navbar a{
+  text-decoration:none; font-size:.95rem;
+  padding:.35rem .9rem; border-radius:6px;
+}
+.btn-login{
+  background:#3498db; color:#fff;
+}
+.btn-login:hover{background:#2174b7}
+.btn-logout{
+  background:#e74c3c; color:#fff;
+}
+.btn-logout:hover{background:#c0392b}
+.welcome{font-weight:600;}

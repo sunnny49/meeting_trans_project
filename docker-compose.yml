@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql2022
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+    ports: ["1433:1433"]
+    volumes:
+      - dbdata:/var/opt/mssql
+
+  app:
+    build: .
+    container_name: meeting_app
+    depends_on: [db]
+    environment:
+      # 連線字串給 SQLAlchemy
+      MSSQL_CONN_STR: "Driver={ODBC Driver 18 for SQL Server};Server=db,1433;Database=${MSSQL_DB};UID=sa;PWD=${MSSQL_SA_PASSWORD};Encrypt=yes;TrustServerCertificate=yes;"
+      FLASK_SECRET: ${FLASK_SECRET}
+    volumes:
+      - ./uploads:/app/uploads
+    ports: ["5000:5000"]
+
+
+volumes:
+  dbdata:
+
